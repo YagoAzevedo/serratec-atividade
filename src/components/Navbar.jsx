@@ -11,15 +11,17 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            Home
-          </IconButton>
+          <Link to="/">
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              Home
+            </IconButton>
+          </Link>
           <Link to="/cadastrar-alunos">
             <Button color="inherit">Cadastro de Aluno</Button>
           </Link>

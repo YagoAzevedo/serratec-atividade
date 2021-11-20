@@ -9,10 +9,10 @@ import Button from "@mui/material/Button";
 import { StyledTableCell, StyledTableRow } from "./styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../constants";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import {ALUNO} from "../../constants";
 
 const AlunosListagem = () => {
   const MySwal = withReactContent(Swal);
@@ -23,14 +23,14 @@ const AlunosListagem = () => {
   }, []);
 
   const getAlunos = () => {
-    axios.get(API_URL).then((response) => {
+    axios.get(ALUNO).then((response) => {
       setAlunos(response.data);
     });
   };
 
   const deletarAluno = (aluno) => {
     axios
-      .delete(API_URL, { data: aluno })
+      .delete(ALUNO, { data: aluno })
       .then((response) => {
         MySwal.fire(<p>{response?.data?.message}</p>);
         

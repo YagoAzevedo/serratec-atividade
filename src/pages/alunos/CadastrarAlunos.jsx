@@ -24,6 +24,12 @@ const CadastrarAlunos = () => {
           MySwal.fire(<p>{response?.data?.message}</p>);
           limparCampos();
         }
+      }).catch(error => {
+        MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error,
+        })
       });
   };
 

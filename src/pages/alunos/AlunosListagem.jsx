@@ -5,21 +5,50 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import { StyledTableCell, StyledTableRow } from "./styles";
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { API_URL } from "../../constants";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const AlunosListagem = () => {
+  const MySwal = withReactContent(Swal);
   const [alunos, setAlunos] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(API_URL)
-      .then((response) => {
-        setAlunos(response.data);
-      });
+    getAlunos();
   }, []);
+
+  const getAlunos = () => {
+    axios.get(API_URL).then((response) => {
+      setAlunos(response.data);
+    });
+  };
+
+  const deletarAluno = (aluno) => {
+    axios
+      .delete(API_URL, { data: aluno })
+      .then((response) => {
+        MySwal.fire(<p>{response?.data?.message}</p>);
+        
+        const alunoIndex = alunos.findIndex(
+          (elemento) => elemento.id === aluno.id
+        );
+        let newAlunos = [ ...alunos ];
+        newAlunos.splice(alunoIndex, 1);
+        setAlunos(newAlunos);
+      })
+      .catch((error) => {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
+      });
+  };
 
   return (
     <Box sx={{ marginTop: "25px" }}>
@@ -30,6 +59,7 @@ const AlunosListagem = () => {
               <StyledTableCell>Nome</StyledTableCell>
               <StyledTableCell>Idade</StyledTableCell>
               <StyledTableCell>Cidade</StyledTableCell>
+              <StyledTableCell>Ações</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -38,6 +68,11 @@ const AlunosListagem = () => {
                 <StyledTableCell>{aluno.nome}</StyledTableCell>
                 <StyledTableCell>{aluno.idade}</StyledTableCell>
                 <StyledTableCell>{aluno.cidade}</StyledTableCell>
+                <StyledTableCell>
+                  <Button onClick={() => deletarAluno(aluno)} variant="text">
+                    <DeleteIcon />
+                  </Button>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

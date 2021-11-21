@@ -11,6 +11,7 @@ const Form = styled.form`
 const InputCadastro = styled(TextField)`
   width: 500px;
   margin: 15px auto;
+  background-color: white;
 `;
 
 const ButtonCadastro = styled(Button)`

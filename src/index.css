@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(239, 248, 201);
 }
 
 code {
@@ -16,3 +17,19 @@ a {
   text-decoration: none;
   color: inherit;
 }
+<<<<<<< Updated upstream
+=======
+.Homebody{
+  color: rgb(25,118,210)!important;
+  text-align: center!important;
+}
+
+.centralizar{
+  display: flex;
+  justify-content: center;
+}
+
+.spaced-top{
+  margin-top: 30px;
+}
+>>>>>>> Stashed changes

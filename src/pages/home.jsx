@@ -12,12 +12,13 @@ import Grid from '@mui/material/Grid';
         textAlign: 'center',
         color: theme.palette.text.secondary,
       }));
-    return(
-        
+
+    return(        
     <>
         <div className='Homebody'>
         <h1>Seja bem-vindo ao portal do colobarador.</h1>
         <h3>Aqui você pode cadastrar e remover alunos,materias.</h3>
+        <p>Aproveite essa comodidade</p>
         <h3>Aproveite!</h3>
         
         <h1 className="spaced-top">Conheça os nossos desenvolvedores:</h1>
@@ -40,7 +41,6 @@ import Grid from '@mui/material/Grid';
         </Grid>
       </Grid>
     </Box>
-
     </div>
 </>
  )

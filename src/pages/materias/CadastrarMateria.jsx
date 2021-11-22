@@ -11,7 +11,6 @@ const CadastrarMaterias = () => {
   const [titulo, setTitulo] = useState();
   const [professor_nome, setProfessor] = useState();
  
-
   const cadastraMaterias = () => {
     axios
       .post(MATERIAS, {
@@ -51,7 +50,6 @@ const CadastrarMaterias = () => {
         value={professor_nome}
         onChange={(e) => setProfessor(e.target.value)}
       />
-    
           <ButtonCadastro variant="contained" onClick={cadastraMaterias}>
         Cadastrar
       </ButtonCadastro>

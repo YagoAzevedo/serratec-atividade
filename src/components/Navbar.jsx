@@ -22,8 +22,17 @@ export default function ButtonAppBar() {
               Home
             </IconButton>
           </Link>
+          <Link to="/consultar-alunos">
+            <Button color="inherit">Consultar Alunos</Button>
+          </Link>
           <Link to="/cadastrar-alunos">
             <Button color="inherit">Cadastro de Aluno</Button>
+          </Link>
+          <Link to="/consultar-materias">
+            <Button color="inherit">Consultar Materias</Button>
+          </Link>
+          <Link to="/cadastrar-materias">
+            <Button color="inherit">Cadastro de Materias</Button>
           </Link>
         </Toolbar>
       </AppBar>

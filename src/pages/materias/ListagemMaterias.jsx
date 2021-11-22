@@ -12,34 +12,35 @@ import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { ALUNOS } from "../../components/LinkAPIAlunos"
+import { MATERIAS } from "../../components/LinkApiMaterias";
 
-const AlunosListagem = () => {
+const MateriasListagem = () => {
   const MySwal = withReactContent(Swal);
-  const [alunos, setAlunos] = useState([]);
+
+  const [materias, setMaterias] = useState([]);
 
   useEffect(() => {
-    getAlunos();
+    getMaterias();
   }, []);
 
-  const getAlunos = () => {
-    axios.get(ALUNOS).then((response) => {
-
-      setAlunos(response.data);
+  const getMaterias = () => {
+    axios.get(MATERIAS).then((response) => {
+        setMaterias(response.data);
     });
   };
 
-  const deletarAluno = (aluno) => {
-    axios.delete(ALUNOS, { data: aluno })
+  const deletarMateria = (materia) => {
+    axios
+      .delete(MATERIAS, { data: materia })
       .then((response) => {
         MySwal.fire(<p>{response?.data?.message}</p>);
         
-        const alunoIndex = alunos.findIndex(
-          (elemento) => elemento.id === aluno.id
+        const materiasIndex = materias.findIndex(
+          (elemento) => elemento.id === materia.id
         );
-        let newAlunos = [ ...alunos ];
-        newAlunos.splice(alunoIndex, 1);
-        setAlunos(newAlunos);
+        let newMaterias = [ ...materias ];
+        newMaterias.splice(materiasIndex, 1);
+        setMaterias(newMaterias);
       })
       .catch((error) => {
         MySwal.fire({
@@ -56,20 +57,19 @@ const AlunosListagem = () => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Nome</StyledTableCell>
-              <StyledTableCell>Idade</StyledTableCell>
-              <StyledTableCell>Cidade</StyledTableCell>
+              <StyledTableCell>Matéria</StyledTableCell>
+              <StyledTableCell>Professor</StyledTableCell>
               <StyledTableCell>Ações</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {alunos.map((aluno) => (
+            {materias.map((materias) => (
               <StyledTableRow>
-                <StyledTableCell>{aluno.nome}</StyledTableCell>
-                <StyledTableCell>{aluno.idade}</StyledTableCell>
-                <StyledTableCell>{aluno.cidade}</StyledTableCell>
+                <StyledTableCell>{materias.titulo}</StyledTableCell>
+                <StyledTableCell>{materias.professor_nome}</StyledTableCell>
+                
                 <StyledTableCell>
-                  <Button onClick={() => deletarAluno(aluno)} variant="text">
+                  <Button onClick={() => deletarMateria(materias)} variant="text">
                     <DeleteIcon />
                   </Button>
                 </StyledTableCell>
@@ -82,4 +82,4 @@ const AlunosListagem = () => {
   );
 };
 
-export default AlunosListagem;
+export default MateriasListagem;

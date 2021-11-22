@@ -1,23 +1,21 @@
 import axios from "axios";
 import { useState } from "react";
 import { ButtonCadastro, Form, InputCadastro } from "../../components/Cadastros";
-import { ALUNOS } from "../../components/LinkAPIAlunos"
+import { MATERIAS } from "../../components/LinkApiMaterias";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const CadastrarAlunos = () => {
+const CadastrarMaterias = () => {
   const MySwal = withReactContent(Swal);
 
-  const [nome, setNome] = useState();
-  const [idade, setIdade] = useState();
-  const [cidade, setCidade] = useState();
-
-  const cadastrarAlunos = () => {
+  const [titulo, setTitulo] = useState();
+  const [professor_nome, setProfessor] = useState();
+ 
+  const cadastraMaterias = () => {
     axios
-      .post(ALUNOS, {
-        nome,
-        idade,
-        cidade,
+      .post(MATERIAS, {
+        titulo,
+        professor_nome,
       })
       .then((response) => {
         if (response.status === 201) {
@@ -34,37 +32,29 @@ const CadastrarAlunos = () => {
   };
 
   const limparCampos = () => {
-    setNome("");
-    setIdade("");
-    setCidade("");
+    setTitulo("");
+    setProfessor("");
   };
 
   return (
     <Form>
       <InputCadastro
-        label="Nome"
+        label="Matéria"
         variant="outlined"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
+        value={titulo}
+        onChange={(e) => setTitulo(e.target.value)}
       />
       <InputCadastro
-        label="Idade"
+        label="Professor"
         variant="outlined"
-        value={idade}
-        onChange={(e) => setIdade(e.target.value)}
+        value={professor_nome}
+        onChange={(e) => setProfessor(e.target.value)}
       />
-      <InputCadastro
-        label="Cidade"
-        variant="outlined"
-        value={cidade}
-        onChange={(e) => setCidade(e.target.value)}
-      />
-
-      <ButtonCadastro variant="contained" onClick={cadastrarAlunos}>
+          <ButtonCadastro variant="contained" onClick={cadastraMaterias}>
         Cadastrar
       </ButtonCadastro>
     </Form>
   );
 };
 
-export default CadastrarAlunos;
+export default CadastrarMaterias;

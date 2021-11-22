@@ -9,14 +9,10 @@ import Button from "@mui/material/Button";
 import { StyledTableCell, StyledTableRow } from "./styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../constants";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-<<<<<<< Updated upstream
-=======
 import { ALUNOS } from "../../components/LinkAPIAlunos"
->>>>>>> Stashed changes
 
 const AlunosListagem = () => {
   const MySwal = withReactContent(Swal);
@@ -27,22 +23,14 @@ const AlunosListagem = () => {
   }, []);
 
   const getAlunos = () => {
-<<<<<<< Updated upstream
-    axios.get(API_URL).then((response) => {
-=======
     axios.get(ALUNOS).then((response) => {
->>>>>>> Stashed changes
+
       setAlunos(response.data);
     });
   };
 
   const deletarAluno = (aluno) => {
-    axios
-<<<<<<< Updated upstream
-      .delete(API_URL, { data: aluno })
-=======
-      .delete(ALUNOS, { data: aluno })
->>>>>>> Stashed changes
+    axios.delete(ALUNOS, { data: aluno })
       .then((response) => {
         MySwal.fire(<p>{response?.data?.message}</p>);
         

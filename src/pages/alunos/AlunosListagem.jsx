@@ -11,10 +11,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useNavigate } from 'react-router-dom';
 
 const AlunosListagem = () => {
+  const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
   const [alunos, setAlunos] = useState([]);
 
@@ -33,11 +36,11 @@ const AlunosListagem = () => {
       .delete(API_URL, { data: aluno })
       .then((response) => {
         MySwal.fire(<p>{response?.data?.message}</p>);
-        
+
         const alunoIndex = alunos.findIndex(
           (elemento) => elemento.id === aluno.id
         );
-        let newAlunos = [ ...alunos ];
+        let newAlunos = [...alunos];
         newAlunos.splice(alunoIndex, 1);
         setAlunos(newAlunos);
       })
@@ -49,6 +52,23 @@ const AlunosListagem = () => {
         });
       });
   };
+
+  const editarAluno = (aluno) => {
+    navigate(`/editar-alunos/${aluno.id}`);
+  }
+
+  // SE FOSSE USAR A ABSTRAÇÃO (aula 4)
+  // const listaCampos = [
+  //   "nome",
+  //   "idade",
+  //   "cidade"
+  // ];
+
+  // return (
+  //   <Box sx={{ marginTop: "25px" }}>
+  //     <TabelaSerratec listaCampos={listaCampos} listaValores={alunos} />
+  //   </Box>
+  // );
 
   return (
     <Box sx={{ marginTop: "25px" }}>
@@ -69,6 +89,9 @@ const AlunosListagem = () => {
                 <StyledTableCell>{aluno.idade}</StyledTableCell>
                 <StyledTableCell>{aluno.cidade}</StyledTableCell>
                 <StyledTableCell>
+                  <Button onClick={() => editarAluno(aluno)} variant="text">
+                    <EditIcon />
+                  </Button>
                   <Button onClick={() => deletarAluno(aluno)} variant="text">
                     <DeleteIcon />
                   </Button>

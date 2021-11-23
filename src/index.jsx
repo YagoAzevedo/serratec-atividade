@@ -10,7 +10,8 @@ import CadastrarAlunos from "./pages/alunos/CadastrarAlunos";
 const Routes = () => {
   const routes = useRoutes([
     { path: "/", element: <AlunosListagem /> },
-    { path: "/cadastrar-alunos", element: <CadastrarAlunos /> }
+    { path: "/cadastrar-alunos", element: <CadastrarAlunos /> },
+    { path: "/editar-alunos/:id", element: <CadastrarAlunos /> }
   ]);
 
   return routes;

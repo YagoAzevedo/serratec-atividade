@@ -18,4 +18,4 @@ const ButtonCadastro = styled(Button)`
   margin: 10px auto;
 `;
 
-export { Form, InputCadastro, ButtonCadastro };
+export default { Form, InputCadastro, ButtonCadastro };

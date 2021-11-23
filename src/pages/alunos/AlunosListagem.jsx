@@ -11,15 +11,26 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import Lottie from "react-lottie";
+import animationData from "../../lotties/78259-loading.json";
 
 const AlunosListagem = () => {
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
   const [alunos, setAlunos] = useState([]);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   useEffect(() => {
     getAlunos();
@@ -27,7 +38,9 @@ const AlunosListagem = () => {
 
   const getAlunos = () => {
     axios.get(API_URL).then((response) => {
-      setAlunos(response.data);
+      setTimeout(() => {
+        setAlunos(response.data);
+      }, 5000)
     });
   };
 
@@ -55,7 +68,7 @@ const AlunosListagem = () => {
 
   const editarAluno = (aluno) => {
     navigate(`/editar-alunos/${aluno.id}`);
-  }
+  };
 
   // SE FOSSE USAR A ABSTRAÇÃO (aula 4)
   // const listaCampos = [
@@ -72,35 +85,41 @@ const AlunosListagem = () => {
 
   return (
     <Box sx={{ marginTop: "25px" }}>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Nome</StyledTableCell>
-              <StyledTableCell>Idade</StyledTableCell>
-              <StyledTableCell>Cidade</StyledTableCell>
-              <StyledTableCell>Ações</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {alunos.map((aluno) => (
-              <StyledTableRow>
-                <StyledTableCell>{aluno.nome}</StyledTableCell>
-                <StyledTableCell>{aluno.idade}</StyledTableCell>
-                <StyledTableCell>{aluno.cidade}</StyledTableCell>
-                <StyledTableCell>
-                  <Button onClick={() => editarAluno(aluno)} variant="text">
-                    <EditIcon />
-                  </Button>
-                  <Button onClick={() => deletarAluno(aluno)} variant="text">
-                    <DeleteIcon />
-                  </Button>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {alunos.length > 0 ? (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Nome</StyledTableCell>
+                <StyledTableCell>Idade</StyledTableCell>
+                <StyledTableCell>Cidade</StyledTableCell>
+                <StyledTableCell>Ações</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {alunos.map((aluno) => (
+                <StyledTableRow>
+                  <StyledTableCell>{aluno.nome}</StyledTableCell>
+                  <StyledTableCell>{aluno.idade}</StyledTableCell>
+                  <StyledTableCell>{aluno.cidade}</StyledTableCell>
+                  <StyledTableCell>
+                    <Button onClick={() => editarAluno(aluno)} variant="text">
+                      <EditIcon />
+                    </Button>
+                    <Button onClick={() => deletarAluno(aluno)} variant="text">
+                      <DeleteIcon />
+                    </Button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <>
+          <Lottie options={defaultOptions} height={500} width={500} />
+        </>
+      )}
     </Box>
   );
 };

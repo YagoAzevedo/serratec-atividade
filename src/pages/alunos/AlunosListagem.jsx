@@ -38,9 +38,7 @@ const AlunosListagem = () => {
 
   const getAlunos = () => {
     axios.get(API_URL).then((response) => {
-      setTimeout(() => {
-        setAlunos(response.data);
-      }, 5000)
+      setAlunos(response.data);
     });
   };
 

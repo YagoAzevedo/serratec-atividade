@@ -2,7 +2,7 @@ import styledComponent from 'styled-components';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 
-export const ThemeWrapper = styledComponent.div`
+export const SwitchWrapper = styledComponent.div`
   flex: 1;
   display: flex;
   justify-content: flex-end;

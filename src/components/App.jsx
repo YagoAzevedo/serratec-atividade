@@ -3,7 +3,7 @@ import AlunosListagem from '../pages/alunos/AlunosListagem';
 import CadastrarAlunos from "../pages/alunos/CadastrarAlunos";
 import Container from '@mui/material/Container';
 import { useContext } from "react";
-import TemaContext from "../context/tema";
+import { TemaContext } from "../context";
 import tema from "../tema";
 
 const Routes = () => {

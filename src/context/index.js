@@ -1,7 +1,19 @@
-import { TemaProvider } from "./tema";
+import { createContext, useState } from "react";
 
-const GlobalContext = ({ children }) => {
-  return <TemaProvider>{children}</TemaProvider>;
+export const TemaContext = createContext();
+export const TemaProvider = ({children}) => {
+  const [temaSelecionado, setTemaSelecionado] = useState(
+    "claro" // informa o valor inicial do estado
+  );
+
+  return (
+    <TemaContext.Provider
+      value={{
+        temaSelecionado,
+        setTemaSelecionado,
+      }}
+    >
+      {children}
+    </TemaContext.Provider>
+  );
 };
-
-export default GlobalContext;

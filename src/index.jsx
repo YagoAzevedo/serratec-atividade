@@ -5,11 +5,11 @@ import { BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import App from "./components/App";
 import DefaultPage from "./components/DefaultPage";
-import GlobalContext from "./context";
+import { TemaProvider } from "./context";
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalContext>
+    <TemaProvider>
       {/* 
       DefaultPage
       É só uma div, que pega o tema, pra incluir no fundo da página
@@ -23,7 +23,7 @@ ReactDOM.render(
           <App />
         </BrowserRouter>
       </DefaultPage>
-    </GlobalContext>
+    </TemaProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

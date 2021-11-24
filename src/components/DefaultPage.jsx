@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import TemaContext from "../context/tema";
+import { TemaContext } from "../context";
 import tema from "../tema";
 
 const DefaultPage = (props) => {

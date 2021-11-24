@@ -5,8 +5,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
-import { ThemeWrapper, MaterialUISwitch } from "./styles";
-import TemaContext from "../../context/tema";
+import { SwitchWrapper, MaterialUISwitch } from "./styles";
+import { TemaContext } from "../../context";
 
 export default function Navbar(props) {
   const { temaSelecionado, setTemaSelecionado } = useContext(TemaContext);
@@ -35,7 +35,7 @@ export default function Navbar(props) {
           <Link to="/cadastrar-alunos">
             <Button color="inherit">Cadastro de Aluno</Button>
           </Link>
-          <ThemeWrapper>
+          <SwitchWrapper>
             <MaterialUISwitch
               onClick={(e) => {
                 alterarTema(e);
@@ -43,7 +43,7 @@ export default function Navbar(props) {
               sx={{ m: 1 }}
             />
             <span style={{ alignSelf: "center" }}>Alterar tema</span>
-          </ThemeWrapper>
+          </SwitchWrapper>
         </Toolbar>
       </AppBar>
     </Box>

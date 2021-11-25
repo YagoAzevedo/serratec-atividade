@@ -5,12 +5,14 @@ import Container from '@mui/material/Container';
 import { useContext } from "react";
 import { TemaContext } from "../context";
 import tema from "../tema";
+import Login from "../pages/Login";
 
 const Routes = () => {
   const routes = useRoutes([
     { path: "/", element: <AlunosListagem /> },
     { path: "/cadastrar-alunos", element: <CadastrarAlunos /> },
     { path: "/editar-alunos/:id", element: <CadastrarAlunos /> },
+    { path: "/login", element: <Login /> }
   ]);
 
   return routes;

@@ -5,7 +5,6 @@ import { API_URL } from "../../constants";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useParams } from "react-router";
-import ButtonSerratec from "../../components/ButtonSerratec";
 
 const CadastrarAlunos = () => {
   const { id } = useParams();
@@ -101,9 +100,9 @@ const CadastrarAlunos = () => {
         onChange={(e) => setCidade(e.target.value)}
       />
 
-      <ButtonSerratec temaSelecionado="claro">
+      <Styles.ButtonCadastro onClick={cadastrarAlunos}>
         {id ? 'Editar' : 'Cadastrar'}
-      </ButtonSerratec>
+      </Styles.ButtonCadastro>
     </Styles.Form>
   );
 };

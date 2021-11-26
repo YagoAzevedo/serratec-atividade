@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import styledComponent from 'styled-components';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
@@ -6,6 +7,18 @@ export const SwitchWrapper = styledComponent.div`
   flex: 1;
   display: flex;
   justify-content: flex-end;
+=======
+import styledComponent from "styled-components";
+import Switch from '@mui/material/Switch';
+import { styled } from '@mui/material/styles';
+
+
+export const ThemeWrapper = styledComponent.div`
+  flex: 1;
+  display Flex;
+  justify-content: flex-end
+
+>>>>>>> Stashed changes
 `;
 
 export const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -53,4 +66,8 @@ export const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
       borderRadius: 20 / 2,
     },
+<<<<<<< Updated upstream
   }));
+=======
+  }));
+>>>>>>> Stashed changes

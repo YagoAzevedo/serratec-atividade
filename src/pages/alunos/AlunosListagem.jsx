@@ -7,21 +7,39 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { StyledTableCell, StyledTableRow } from "./styles";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+<<<<<<< Updated upstream
 import { useNavigate } from "react-router-dom";
 import Lottie from "react-lottie";
 import animationData from "../../lotties/78259-loading.json";
+=======
+import { ALUNOS } from "../../components/LinkAPIAlunos"
+import Lottie from "react-lottie"
+import animeationData from "../../components/lotties/load.json";
+import { useNavigate } from "react-router-dom";
+import AlunoContext from "../../context/aluno"
+import EditIcon from "@mui/icons-material/Edit";
+>>>>>>> Stashed changes
 
 const AlunosListagem = () => {
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
-  const [alunos, setAlunos] = useState([]);
+  const { alunos, setAlunos } = useContext(AlunoContext);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animeationData: animeationData,
+    rendererSettings: {
+      preserveApectRatio: "xMidYMid slice",
+    }
+  }
 
   const defaultOptions = {
     loop: true,
@@ -37,7 +55,11 @@ const AlunosListagem = () => {
   }, []);
 
   const getAlunos = () => {
+<<<<<<< Updated upstream
     axios.get(API_URL).then((response) => {
+=======
+    axios.get(ALUNOS).then((response) => {
+>>>>>>> Stashed changes
       setAlunos(response.data);
     });
   };
@@ -68,6 +90,7 @@ const AlunosListagem = () => {
     navigate(`/editar-alunos/${aluno.id}`);
   };
 
+<<<<<<< Updated upstream
   // SE FOSSE USAR A ABSTRAÇÃO (aula 4)
   // const listaCampos = [
   //   "nome",
@@ -80,6 +103,8 @@ const AlunosListagem = () => {
   //     <TabelaSerratec listaCampos={listaCampos} listaValores={alunos} />
   //   </Box>
   // );
+=======
+>>>>>>> Stashed changes
 
   return (
     <Box sx={{ marginTop: "25px" }}>
@@ -117,9 +142,15 @@ const AlunosListagem = () => {
         <>
           <Lottie options={defaultOptions} height={500} width={500} />
         </>
+<<<<<<< Updated upstream
       )}
+=======
+      )
+      }
+>>>>>>> Stashed changes
     </Box>
   );
-};
+}
+
 
 export default AlunosListagem;

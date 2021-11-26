@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { createContext, useState } from "react";
 
 export const TemaContext = createContext();
@@ -35,3 +36,22 @@ export const UsuarioProvider = ({children}) => {
     </UsuarioContext.Provider>
   );
 };
+=======
+import {TemaProvider} from "./tema";
+import {AlunoProvider} from "./aluno";
+import {MateriaProvider}from "./materia";
+
+const GlobalContext = ({children}) =>{
+    return (
+    <TemaProvider>
+        <AlunoProvider>
+            <MateriaProvider>
+                {children}
+            </MateriaProvider>
+        </AlunoProvider>
+    </TemaProvider>
+    );
+}
+
+export default GlobalContext;
+>>>>>>> Stashed changes

@@ -6,6 +6,7 @@ const Form = styled.form`
   display: flex;
   margin-top: 25px;
   flex-direction: column;
+  min-height: calc(100vh - 90px);
 `;
 
 const InputCadastro = styled(TextField)`

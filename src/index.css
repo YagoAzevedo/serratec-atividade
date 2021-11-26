@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+<<<<<<< Updated upstream
+=======
+  
+>>>>>>> Stashed changes
 }
 
 code {
@@ -16,3 +20,19 @@ a {
   text-decoration: none;
   color: inherit;
 }
+<<<<<<< Updated upstream
+=======
+.Homebody{
+  color: #1976d2!important;
+  text-align: center!important;
+}
+
+.centralizar{
+  display: flex;
+  justify-content: center;
+}
+
+.spaced-top{
+  margin-top: 30px;
+}
+>>>>>>> Stashed changes

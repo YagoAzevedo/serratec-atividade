@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+
  
  const home =()=>{
     const Item = styled(Paper)(({ theme }) => ({
@@ -16,10 +17,10 @@ import Grid from '@mui/material/Grid';
     return(        
     <>
         <div className='Homebody'>
+      
         <h1>Seja bem-vindo ao portal do colobarador.</h1>
         <h3>Aqui você pode cadastrar e remover alunos,materias.</h3>
-        <p>Aproveite essa comodidade</p>
-        <h3>Aproveite!</h3>
+        <p>Aproveite mais essa comodidade que oferecemos aos nossos Colaboradores</p>
         
         <h1 className="spaced-top">Conheça os nossos desenvolvedores:</h1>
         <Box sx={{ flexGrow: 1 }}>

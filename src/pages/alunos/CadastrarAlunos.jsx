@@ -1,20 +1,58 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ButtonCadastro, Form, InputCadastro } from "../../components/Cadastros";
 import { ALUNOS } from "../../components/LinkAPIAlunos"
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useParams } from "react-router";
+import AlunoContext from "../../context/aluno";
 
 const CadastrarAlunos = () => {
-  const MySwal = withReactContent(Swal);
 
-  const [nome, setNome] = useState();
-  const [idade, setIdade] = useState();
-  const [cidade, setCidade] = useState();
+  const { id } = useParams();
+  const MySwal = withReactContent(Swal);
+  const { setAlunos, alunos } = useContext(AlunoContext);
+  const valorInicial = id ? "" : null;
+  const [nome, setNome] = useState(valorInicial);
+  const [idade, setIdade] = useState(valorInicial);
+  const [cidade, setCidade] = useState(valorInicial);
+
+  useEffect(() => {
+    getAlunos()
+  }, []);
+
+  const getAlunos = () => {
+    alunos.forEach((aluno) => {
+      if (aluno.id == id) {
+        setNome(aluno.nome);
+        setIdade(aluno.idade);
+        setCidade(aluno.cidade);
+      }
+    })
+  }
 
   const cadastrarAlunos = () => {
-    axios
-      .post(ALUNOS, {
+    if (id){
+      axios.put(ALUNOS, {
+        id,
+        nome,
+        idade,
+        cidade,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          MySwal.fire(<p>{response?.data?.message}</p>);
+          limparCampos();
+        }
+      }).catch(error => {
+        MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error,
+        })
+      });
+    } else {
+      axios.post(ALUNOS, {
         nome,
         idade,
         cidade,
@@ -31,6 +69,7 @@ const CadastrarAlunos = () => {
           text: error,
         })
       });
+    }    
   };
 
   const limparCampos = () => {
@@ -61,7 +100,7 @@ const CadastrarAlunos = () => {
       />
 
       <ButtonCadastro variant="contained" onClick={cadastrarAlunos}>
-        Cadastrar
+       {id ? 'Editar' : 'Cadastrar'}
       </ButtonCadastro>
     </Form>
   );

@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(239, 248, 201);
+  
 }
 
 code {
@@ -18,7 +18,7 @@ a {
   color: inherit;
 }
 .Homebody{
-  color: rgb(25,118,210)!important;
+  color: #1976d2!important;
   text-align: center!important;
 }
 

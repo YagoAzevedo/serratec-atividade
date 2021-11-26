@@ -7,17 +7,32 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { StyledTableCell, StyledTableRow } from "./styles";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { MATERIAS } from "../../components/LinkApiMaterias";
+import { useNavigate } from "react-router";
+import MateriaContext from "../../context/materia";
+import animeationData from "../../components/lotties/load.json";
+import Lottie from "react-lottie";
+import EditIcon from "@mui/icons-material/Edit";
+
 
 const MateriasListagem = () => {
+  const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
+  const { materias, setMaterias } = useContext(MateriaContext)
 
-  const [materias, setMaterias] = useState([]);
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animeationData: animeationData,
+    rendererSettings: {
+      preserveApectRatio: "xMidYMid slice",
+    }
+  }
 
   useEffect(() => {
     getMaterias();
@@ -25,7 +40,7 @@ const MateriasListagem = () => {
 
   const getMaterias = () => {
     axios.get(MATERIAS).then((response) => {
-        setMaterias(response.data);
+      setMaterias(response.data);
     });
   };
 
@@ -34,11 +49,11 @@ const MateriasListagem = () => {
       .delete(MATERIAS, { data: materia })
       .then((response) => {
         MySwal.fire(<p>{response?.data?.message}</p>);
-        
+
         const materiasIndex = materias.findIndex(
           (elemento) => elemento.id === materia.id
         );
-        let newMaterias = [ ...materias ];
+        let newMaterias = [...materias];
         newMaterias.splice(materiasIndex, 1);
         setMaterias(newMaterias);
       })
@@ -51,33 +66,46 @@ const MateriasListagem = () => {
       });
   };
 
+  const editarMateria = (materia) => {
+    navigate(`/editar-materias/${materia.id}`)
+  };
+
   return (
     <Box sx={{ marginTop: "25px" }}>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Matéria</StyledTableCell>
-              <StyledTableCell>Professor</StyledTableCell>
-              <StyledTableCell>Ações</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {materias.map((materias) => (
-              <StyledTableRow>
-                <StyledTableCell>{materias.titulo}</StyledTableCell>
-                <StyledTableCell>{materias.professor_nome}</StyledTableCell>
-                
-                <StyledTableCell>
-                  <Button onClick={() => deletarMateria(materias)} variant="text">
-                    <DeleteIcon />
-                  </Button>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {materias.length > 0 ? (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Matéria</StyledTableCell>
+                <StyledTableCell>Professor</StyledTableCell>
+                <StyledTableCell>Ações</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {materias.map((materia) => (
+                <StyledTableRow>
+                  <StyledTableCell>{materia.titulo}</StyledTableCell>
+                  <StyledTableCell>{materia.professor_nome}</StyledTableCell>
+                  <StyledTableCell>
+                    <Button onClick={() => editarMateria(materia)} variant="text">
+                      <EditIcon />
+                    </Button>
+                    <Button onClick={() => deletarMateria(materia)} variant="text">
+                      <DeleteIcon />
+                    </Button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <>
+          <Lottie options={defaultOptions} height={500} width={500} />
+        </>
+      )
+      }
     </Box>
   );
 };

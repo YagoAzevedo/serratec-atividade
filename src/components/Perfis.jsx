@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+
 const PerfilGustavo = () =>{
     return(
         <Card sx={{ maxWidth: 145 }}>
@@ -81,7 +82,7 @@ const PerfilGilnei = () =>{
           component="img"
           alt="Gilnei Lima"
           height="150px"
-          image="https://media-exp1.licdn.com/dms/image/C4D03AQGeFFk0WisWSg/profile-displayphoto-shrink_800_800/0/1632373811024?e=1642636800&v=beta&t=eTRXFIWvczHqrWXKFYDJc3hpXh_oiIHwLDeUX2xA_2U"
+          image="https://avatars.githubusercontent.com/u/78995998?v=4"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

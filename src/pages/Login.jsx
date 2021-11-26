@@ -10,6 +10,7 @@ const Login = () => {
   const efetuarLogin = () => {
     // axios.post(URLLOGIN, {usuario, senha})
     setUsuario(usuarioInput);
+    localStorage.setItem('usuarioLogado', usuarioInput);
   }
 
   return (

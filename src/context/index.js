@@ -21,7 +21,7 @@ export const TemaProvider = ({children}) => {
 export const UsuarioContext = createContext();
 export const UsuarioProvider = ({children}) => {
   const [usuario, setUsuario] = useState(
-    "Usuário" // informa o valor inicial do estado
+    localStorage.getItem('usuarioLogado')
   );
 
   return (

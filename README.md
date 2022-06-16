@@ -5,18 +5,22 @@
 * Os endpoints a serem utilizados são os seguintes:
 * 1) GET: https://secret-headland-69654.herokuapp.com/materias
   2) POST: https://secret-headland-69654.herokuapp.com/materias
-     1) Body:
-        {
+     Body:
+       ``` 
+       {
         "titulo": "Banco de dados",
         "professor_nome": "João"
         }
+        ```
   3) DELETE: https://secret-headland-69654.herokuapp.com/materias
-     1) Body:
+     Body:
+        ```
         {
         "id": 3,
-        "titulo": "Banco de dados",
+        "**titulo**": "Banco de dados",
         "professor_nome": "João"
         }
+        ```
 
 * A atividade deve ser executada em grupo.
 * Caso a api esteja inacessível por algum motivo siga o passo a passo na página seguinte para executar localmente:

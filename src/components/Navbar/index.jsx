@@ -9,47 +9,55 @@ import { SwitchWrapper, MaterialUISwitch } from "./styles";
 import { TemaContext, UsuarioContext } from "../../context";
 
 export default function Navbar(props) {
-  const { temaSelecionado, setTemaSelecionado } = useContext(TemaContext);
-  const { usuario } = useContext(UsuarioContext);
-  const alterarTema = (e) => {
-    const novoTema = e.target.checked ? "escuro" : "claro";
+	const { temaSelecionado, setTemaSelecionado } = useContext(TemaContext);
+	const { usuario } = useContext(UsuarioContext);
+	const alterarTema = (e) => {
+		const novoTema = e.target.checked ? "escuro" : "claro";
 
-    setTemaSelecionado(novoTema);
-  };
+		setTemaSelecionado(novoTema);
+	};
 
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Link to="/">
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              Home
-            </IconButton>
-          </Link>
-          <Link to="/cadastrar-alunos">
-            <Button color="inherit">Cadastro de Aluno</Button>
-          </Link>
-          <SwitchWrapper>
-            <MaterialUISwitch
-              onClick={(e) => {
-                alterarTema(e);
-              }}
-              sx={{ m: 1 }}
-            />
-            <span style={{ alignSelf: "center" }}>Alterar tema</span>
+	return (
+		<Box sx={{ flexGrow: 1 }}>
+			<AppBar position="static">
+				<Toolbar>
+					<Link to="/alunos">
+						<IconButton
+							size="large"
+							edge="start"
+							color="inherit"
+							aria-label="menu"
+							sx={{ mr: 2 }}
+						>
+							Home
+						</IconButton>
+					</Link>
+					<Link to="/cadastrar-alunos">
+						<Button color="inherit">Cadastro de Aluno</Button>
+					</Link>
+					<Link to="/cadastrar-materias">
+						<Button color="inherit">Cadastro de Matérias</Button>
+					</Link>
 
-            <span style={{ alignSelf: "center", marginLeft: "15px" }}>
-              {usuario}
-            </span>
-          </SwitchWrapper>
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
+					<SwitchWrapper>
+						<MaterialUISwitch
+							onClick={(e) => {
+								alterarTema(e);
+							}}
+							sx={{ m: 1 }}
+						/>
+						<span style={{ alignSelf: "center" }}>
+							Alterar tema
+						</span>
+
+						<span
+							style={{ alignSelf: "center", marginLeft: "15px" }}
+						>
+							{usuario}
+						</span>
+					</SwitchWrapper>
+				</Toolbar>
+			</AppBar>
+		</Box>
+	);
 }

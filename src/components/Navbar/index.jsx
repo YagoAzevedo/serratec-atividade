@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import { SwitchWrapper, MaterialUISwitch } from "./styles";
 import { TemaContext, UsuarioContext } from "../../context";
@@ -29,7 +30,7 @@ export default function Navbar(props) {
 							aria-label="menu"
 							sx={{ mr: 2 }}
 						>
-							Home
+							<MenuIcon />
 						</IconButton>
 					</Link>
 					<Link to="/cadastrar-alunos">

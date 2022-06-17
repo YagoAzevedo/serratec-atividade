@@ -58,7 +58,7 @@ const CadastrarMaterias = () => {
 					professor_nome,
 				})
 				.then((response) => {
-					if (response.status === 200) {
+					if (response.status === 201) {
 						MySwal.fire(<p>{response?.data?.message}</p>);
 						limparCampos();
 					}

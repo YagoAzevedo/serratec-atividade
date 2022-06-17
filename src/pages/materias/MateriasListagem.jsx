@@ -78,22 +78,18 @@ const MateriasListagem = () => {
 								<StyledTableCell>
 									Nome do Professor
 								</StyledTableCell>
-								<StyledTableCell align="right">
-									Materia
-								</StyledTableCell>
-								<StyledTableCell align="right">
-									Ações
-								</StyledTableCell>
+								<StyledTableCell>Materia</StyledTableCell>
+								<StyledTableCell>Ações</StyledTableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
 							{materias.map((materia) => (
 								<StyledTableRow>
 									<StyledTableCell>
-										{materia.nomeProfessor}
+										{materia.professor_nome}
 									</StyledTableCell>
 									<StyledTableCell>
-										{materia.nomeMateria}
+										{materia.titulo}
 									</StyledTableCell>
 									<StyledTableCell>
 										<Button

@@ -34,11 +34,7 @@ const App = () => {
 };
 
 export default App;
-// TODO: testar se a integração com a API funcionou
 // TODO: Adicionar o Dropdown na navbar
 
 //TODO:  Opcional: Na tela de edição de alunos, caso não existam alunos carregados no estado global, implemente um “carregando” (loading) baseado em animação do Lottie da mesma forma que a tela de listagem dos alunos. Para testar esse comportamento basta recarregar a página (f5), já estando na tela de edição do aluno
-// TODO: Opcional: Alterar ícones: https://mui.com/material-ui/material-icons/
-// TODO: Opcional: Alterar ícones do navbar
-// TODO: Opcional: trocar o ícone de loading
 // TODO: Opcional: Alterar o tema escuro (Dracula)

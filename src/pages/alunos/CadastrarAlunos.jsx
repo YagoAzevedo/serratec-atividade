@@ -6,115 +6,132 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useParams } from "react-router";
 import { AlunoContext } from "../../context";
+// import Lottie from "react-lottie";
+// import animationData from "../../lotties/9844-loading-40-paperplane.json";
 
 const CadastrarAlunos = () => {
-	const { id } = useParams();
-	const MySwal = withReactContent(Swal);
+  const { id } = useParams();
+  const MySwal = withReactContent(Swal);
 
-	const valorInicial = id ? "" : null;
-	const [nome, setNome] = useState(valorInicial);
-	const [idade, setIdade] = useState(valorInicial);
-	const [cidade, setCidade] = useState(valorInicial);
-	const { alunos, setAlunos } = useContext(AlunoContext);
+  const valorInicial = id ? "" : null;
+  const [nome, setNome] = useState(valorInicial);
+  const [idade, setIdade] = useState(valorInicial);
+  const [cidade, setCidade] = useState(valorInicial);
+  const { alunos, setAlunos } = useContext(AlunoContext);
 
-	useEffect(() => {
-		getAlunos();
-	}, []);
+//   const defaultOptions = {
+//     loop: true,
+//     autoplay: true,
+//     animationData: animationData,
+//     rendererSettings: {
+//       preserveAspectRatio: "xMidYMid slice",
+//     },
+//   };
 
-	const getAlunos = () => {
-		//Se já estiver cadastrado, puxar os dados do aluno
-		//Se o comprimento da
-		if (alunos.length > 0) {
-			axios.get(API_URL).then((response) => {
-				response.data.forEach((aluno) => {
-					if (aluno.id == id) {
-						setNome(aluno.nome);
-						setIdade(aluno.idade);
-						setCidade(aluno.cidade);
-					}
-				});
-			});
-		}
-	};
+  useEffect(() => {
+    getAlunos();
+  }, []);
 
-	const cadastrarAlunos = () => {
-		if (id) {
-			axios
-				.put(API_URL, {
-					id,
-					nome,
-					idade,
-					cidade,
-				})
-				.then((response) => {
-					console.log(response);
-					if (response.status === 200) {
-						MySwal.fire(<p>{response?.data?.message}</p>);
-						limparCampos();
-					}
-				})
-				.catch((error) => {
-					MySwal.fire({
-						icon: "error",
-						title: "Oops...",
-						text: error,
-					});
-				});
-		} else {
-			axios
-				.post(API_URL, {
-					nome,
-					idade,
-					cidade,
-				})
-				.then((response) => {
-					if (response.status === 201) {
-						MySwal.fire(<p>{response?.data?.message}</p>);
-						limparCampos();
-					}
-				})
-				.catch((error) => {
-					MySwal.fire({
-						icon: "error",
-						title: "Oops...",
-						text: error,
-					});
-				});
-		}
-	};
+  const getAlunos = () => {
+    if (alunos.length > 0) {
+      const aluno = alunos.find((lista) => lista.id == id);
+      setNome(aluno.nome);
+      setIdade(aluno.idade);
+      setCidade(aluno.cidade);
+    } else {
+      axios.get(API_URL).then((response) => {
+        response.data.forEach((aluno) => {
+          if (aluno.id == id) {
+            setNome(aluno.nome);
+            setIdade(aluno.idade);
+            setCidade(aluno.cidade);
+          }
+        });
+      });
+    }
+  };
 
-	const limparCampos = () => {
-		setNome("");
-		setIdade("");
-		setCidade("");
-	};
+  const cadastrarAlunos = () => {
+    if (id) {
+      axios
+        .put(API_URL, {
+          id,
+          nome,
+          idade,
+          cidade,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            MySwal.fire(<p>{response?.data?.message}</p>);
+            limparCampos();
+          }
+        })
+        .catch((error) => {
+          MySwal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error,
+          });
+        });
+    } else {
+      axios
+        .post(API_URL, {
+          nome,
+          idade,
+          cidade,
+        })
+        .then((response) => {
+          if (response.status === 201) {
+            MySwal.fire(<p>{response?.data?.message}</p>);
+            limparCampos();
+          }
+        })
+        .catch((error) => {
+          MySwal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error,
+          });
+        });
+    }
+  };
 
-	return (
-		<Styles.Form>
-			<Styles.InputCadastro
-				label="Nome"
-				variant="outlined"
-				value={nome}
-				onChange={(e) => setNome(e.target.value)}
-			/>
-			<Styles.InputCadastro
-				label="Idade"
-				variant="outlined"
-				value={idade}
-				onChange={(e) => setIdade(e.target.value)}
-			/>
-			<Styles.InputCadastro
-				label="Cidade"
-				variant="outlined"
-				value={cidade}
-				onChange={(e) => setCidade(e.target.value)}
-			/>
+  const limparCampos = () => {
+    setNome("");
+    setIdade("");
+    setCidade("");
+  };
 
-			<Styles.ButtonCadastro onClick={cadastrarAlunos}>
-				{id ? "Editar" : "Cadastrar"}
-			</Styles.ButtonCadastro>
-		</Styles.Form>
-	);
+  return (
+    <Styles.Form>
+      <Styles.InputCadastro
+        label="Nome"
+        variant="outlined"
+        value={nome}
+        onChange={(e) => setNome(e.target.value)}
+      />
+      <Styles.InputCadastro
+        label="Idade"
+        variant="outlined"
+        value={idade}
+        onChange={(e) => setIdade(e.target.value)}
+      />
+      <Styles.InputCadastro
+        label="Cidade"
+        variant="outlined"
+        value={cidade}
+        onChange={(e) => setCidade(e.target.value)}
+      />
+
+      <Styles.ButtonCadastro onClick={cadastrarAlunos}>
+        {id ? "Editar" : "Cadastrar"}
+      </Styles.ButtonCadastro>
+      {/* <>
+        <Lottie options={defaultOptions} height={500} width={500} />
+      </> */}
+    </Styles.Form>
+  );
 };
 
 export default CadastrarAlunos;

@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Styles from "../../components/Styles";
 import { API_URL } from "../../constants";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useParams } from "react-router";
+import { AlunoContext } from "../../context";
 
 const CadastrarAlunos = () => {
 	const { id } = useParams();
@@ -14,21 +15,26 @@ const CadastrarAlunos = () => {
 	const [nome, setNome] = useState(valorInicial);
 	const [idade, setIdade] = useState(valorInicial);
 	const [cidade, setCidade] = useState(valorInicial);
+	const { alunos, setAlunos } = useContext(AlunoContext);
 
 	useEffect(() => {
 		getAlunos();
 	}, []);
 
 	const getAlunos = () => {
-		axios.get(API_URL).then((response) => {
-			response.data.forEach((aluno) => {
-				if (aluno.id == id) {
-					setNome(aluno.nome);
-					setIdade(aluno.idade);
-					setCidade(aluno.cidade);
-				}
+		//Se já estiver cadastrado, puxar os dados do aluno
+		//Se o comprimento da
+		if (alunos.length > 0) {
+			axios.get(API_URL).then((response) => {
+				response.data.forEach((aluno) => {
+					if (aluno.id == id) {
+						setNome(aluno.nome);
+						setIdade(aluno.idade);
+						setCidade(aluno.cidade);
+					}
+				});
 			});
-		});
+		}
 	};
 
 	const cadastrarAlunos = () => {

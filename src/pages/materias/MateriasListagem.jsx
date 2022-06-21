@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import Lottie from "react-lottie";
-import animationData from "../../lotties/78259-loading.json";
+import animationData from "../../lotties/9844-loading-40-paperplane.json";
 
 const MateriasListagem = () => {
 	const navigate = useNavigate();

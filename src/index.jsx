@@ -7,6 +7,7 @@ import App from "./components/App";
 import DefaultPage from "./components/DefaultPage";
 import { TemaProvider, UsuarioProvider, AlunoProvider } from "./context";
 
+
 ReactDOM.render(
 	<React.StrictMode>
 		<UsuarioProvider>

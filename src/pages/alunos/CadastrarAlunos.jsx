@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useParams } from "react-router";
 import { AlunoContext } from "../../context";
-// import Lottie from "react-lottie";
-// import animationData from "../../lotties/9844-loading-40-paperplane.json";
+import Lottie from "react-lottie";
+import animationData from "../../lotties/9844-loading-40-paperplane.json";
 
 const CadastrarAlunos = () => {
   const { id } = useParams();
@@ -19,20 +19,21 @@ const CadastrarAlunos = () => {
   const [cidade, setCidade] = useState(valorInicial);
   const { alunos, setAlunos } = useContext(AlunoContext);
 
-//   const defaultOptions = {
-//     loop: true,
-//     autoplay: true,
-//     animationData: animationData,
-//     rendererSettings: {
-//       preserveAspectRatio: "xMidYMid slice",
-//     },
-//   };
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   useEffect(() => {
     getAlunos();
   }, []);
 
   const getAlunos = () => {
+    if (!id) return
     if (alunos.length > 0) {
       const aluno = alunos.find((lista) => lista.id == id);
       setNome(aluno.nome);
@@ -104,34 +105,47 @@ const CadastrarAlunos = () => {
   };
 
   return (
-    <Styles.Form>
-      <Styles.InputCadastro
-        label="Nome"
-        variant="outlined"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
-      />
-      <Styles.InputCadastro
-        label="Idade"
-        variant="outlined"
-        value={idade}
-        onChange={(e) => setIdade(e.target.value)}
-      />
-      <Styles.InputCadastro
-        label="Cidade"
-        variant="outlined"
-        value={cidade}
-        onChange={(e) => setCidade(e.target.value)}
-      />
+    <>
+      {alunos.length > 0 ? (
+        <>
+          <Styles.Form>
+            <Styles.InputCadastro
+              label="Nome"
+              variant="outlined"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+            <Styles.InputCadastro
+              label="Idade"
+              variant="outlined"
+              value={idade}
+              onChange={(e) => setIdade(e.target.value)}
+            />
+            <Styles.InputCadastro
+              label="Cidade"
+              variant="outlined"
+              value={cidade}
+              onChange={(e) => setCidade(e.target.value)}
+            />
 
-      <Styles.ButtonCadastro onClick={cadastrarAlunos}>
-        {id ? "Editar" : "Cadastrar"}
-      </Styles.ButtonCadastro>
-      {/* <>
-        <Lottie options={defaultOptions} height={500} width={500} />
-      </> */}
-    </Styles.Form>
+            <Styles.ButtonCadastro onClick={cadastrarAlunos}>
+              {id ? "Editar" : "Cadastrar"}
+            </Styles.ButtonCadastro>
+          </Styles.Form>
+        </>
+      ) : (
+        <>
+          <Lottie options={defaultOptions} height={500} width={500} />
+        </>
+      )}
+    </>
   );
 };
 
 export default CadastrarAlunos;
+
+{
+  /* <>
+  <Lottie options={defaultOptions} height={500} width={500} />
+</> */
+}

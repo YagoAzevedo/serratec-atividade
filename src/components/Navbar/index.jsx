@@ -36,9 +36,16 @@ export default function Navbar(props) {
 					<Link to="/cadastrar-alunos">
 						<Button color="inherit">Cadastro de Aluno</Button>
 					</Link>
-					<Link to="/cadastrar-materias">
-						<Button color="inherit">Cadastro de Matérias</Button>
+					<Link to="/alunos">
+						<Button color="inherit">Listagem de Alunos</Button>
 					</Link>
+					<Link to="/cadastrar-materias">
+						<Button color="inherit">Cadastro de Matéria</Button>
+					</Link>
+					<Link to="/materias">
+						<Button color="inherit">Listagem de Matérias</Button>
+					</Link>
+
 
 					<SwitchWrapper>
 						<MaterialUISwitch

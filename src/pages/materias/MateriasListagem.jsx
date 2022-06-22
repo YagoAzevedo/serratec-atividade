@@ -7,9 +7,9 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { StyledTableCell, StyledTableRow } from "./styles";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../constants";
+import { API_URL_MATERIAS } from "../../constants";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Swal from "sweetalert2";
@@ -17,12 +17,11 @@ import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import Lottie from "react-lottie";
 import animationData from "../../lotties/9844-loading-40-paperplane.json";
-import { AlunoContext } from "../../context";
 
-const AlunosListagem = () => {
+const MateriasListagem = () => {
 	const navigate = useNavigate();
 	const MySwal = withReactContent(Swal);
-	const { alunos, setAlunos } = useContext(AlunoContext);
+	const [materias, setMaterias] = useState([]);
 
 	const defaultOptions = {
 		loop: true,
@@ -34,89 +33,77 @@ const AlunosListagem = () => {
 	};
 
 	useEffect(() => {
-		getAlunos();
+		getMaterias();
 	}, []);
 
-	//Contexto Global
-	const getAlunos = () => {
-		axios.get(API_URL).then((response) => {
-			setAlunos(response.data);
+	const getMaterias = () => {
+		axios.get(API_URL_MATERIAS).then((response) => {
+			setMaterias(response.data);
 		});
 	};
 
-	const deletarAluno = (aluno) => {
+	const deletarMateria = (materia) => {
 		axios
-			.delete(API_URL, { data: aluno })
+			.delete(API_URL_MATERIAS, { data: materia })
 			.then((response) => {
 				MySwal.fire(<p>{response?.data?.message}</p>);
 
-				const alunoIndex = alunos.findIndex(
-					(elemento) => elemento.id === aluno.id
+				const materiaIndex = materias.findIndex(
+					(elemento) => elemento.id === materia.id
 				);
-				let newAlunos = [...alunos];
-				newAlunos.splice(alunoIndex, 1);
-				setAlunos(newAlunos);
+				let newMaterias = [...materias];
+				newMaterias.splice(materiaIndex, 1);
+				setMaterias(newMaterias);
 			})
 			.catch((error) => {
 				MySwal.fire({
 					icon: "error",
-					title: "Oops...",
+					title: "Oops ...",
 					text: error,
 				});
 			});
 	};
 
-	const editarAluno = (aluno) => {
-		navigate(`/editar-alunos/${aluno.id}`);
+	const editarMateria = (materia) => {
+		navigate(`/editar-materias/${materia.id}`);
 	};
-
-	// SE FOSSE USAR A ABSTRAÇÃO (aula 4)
-	// const listaCampos = [
-	//   "nome",
-	//   "idade",
-	//   "cidade"
-	// ];
-
-	// return (
-	//   <Box sx={{ marginTop: "25px" }}>
-	//     <TabelaSerratec listaCampos={listaCampos} listaValores={alunos} />
-	//   </Box>
-	// );
 
 	return (
 		<Box sx={{ marginTop: "25px" }}>
-			{alunos.length > 0 ? (
+			{materias.length > 0 ? (
 				<TableContainer component={Paper}>
 					<Table sx={{ minWidth: 700 }} aria-label="customized table">
 						<TableHead>
 							<TableRow>
-								<StyledTableCell>Nome</StyledTableCell>
-								<StyledTableCell>Idade</StyledTableCell>
-								<StyledTableCell>Cidade</StyledTableCell>
+								<StyledTableCell>
+									Nome do Professor
+								</StyledTableCell>
+								<StyledTableCell>Materia</StyledTableCell>
 								<StyledTableCell>Ações</StyledTableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{alunos.map((aluno) => (
+							{materias.map((materia) => (
 								<StyledTableRow>
 									<StyledTableCell>
-										{aluno.nome}
+										{materia.professor_nome}
 									</StyledTableCell>
 									<StyledTableCell>
-										{aluno.idade}
-									</StyledTableCell>
-									<StyledTableCell>
-										{aluno.cidade}
+										{materia.titulo}
 									</StyledTableCell>
 									<StyledTableCell>
 										<Button
-											onClick={() => editarAluno(aluno)}
+											onClick={() =>
+												editarMateria(materia)
+											}
 											variant="text"
 										>
 											<EditIcon />
 										</Button>
 										<Button
-											onClick={() => deletarAluno(aluno)}
+											onClick={() =>
+												deletarMateria(materia)
+											}
 											variant="text"
 										>
 											<DeleteIcon />
@@ -136,4 +123,4 @@ const AlunosListagem = () => {
 	);
 };
 
-export default AlunosListagem;
+export default MateriasListagem;

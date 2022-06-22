@@ -6,11 +6,12 @@ const Form = styled.form`
   display: flex;
   margin-top: 25px;
   flex-direction: column;
-`;
+  `;
 
 const InputCadastro = styled(TextField)`
   width: 500px;
   margin: 15px auto;
+  /* && {color: white;} */
 `;
 
 const ButtonCadastro = styled(Button)`
